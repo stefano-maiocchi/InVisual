@@ -35,9 +35,6 @@ namespace InVisual
 
         private void m_OnToolbarClicked(object sender, RoutedEventArgs e)
         {
-            //OnButtonClick?.Invoke(sender, e);
-            //m_showInBrowser();
-
             Button btn = sender as Button;
 
             switch (btn.Tag.ToString())
@@ -68,11 +65,11 @@ namespace InVisual
             if (ofd.ShowDialog() == true)
             {
                 m_currentFileName = ofd.FileName;
-                if (System.IO.Path.GetExtension(m_currentFileName).ToUpper().Equals(".P7M"))
+                if (System.IO.Path.GetExtension(m_currentFileName).Equals(".P7M",StringComparison.InvariantCultureIgnoreCase))
                 {
                     // esegue la decodifica del file
                     m_currentFileName = m_decodeAndSave();
-                    if (m_currentFileName.Length == 0) return;
+                    if (m_currentFileName == string.Empty) return;
                 }
                 // recupera e visualizza il file
                 m_showInBrowser(m_currentFileName);
@@ -88,15 +85,14 @@ namespace InVisual
             {                
                 string xml = InVisualLib.p7m.clsDecrypt.ReadXmlSigned(m_currentFileName);
                 Stream stream = new MemoryStream(Encoding.UTF8.GetBytes(xml));
-                string filename = string.Format("{0}.xml", System.IO.Path.GetFileNameWithoutExtension(m_currentFileName));               
+                string filename = $"{System.IO.Path.GetFileNameWithoutExtension(m_currentFileName)}.xml";
                 filename = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(m_currentFileName), filename);
-                filename = string.Format("{0}.XML", filename.ToUpper().Replace(".XML", ""));
-                // verifica se il file esiste nella destinazione e chiede se sovrascrivere
-                //todo: richiedere cartella alternativa
+                filename = $"{filename.ToUpper().Replace(".XML", "")}.XML";
+                // verifica se il file esiste nella destinazione e chiede se sovrascrivere                
                 if (File.Exists(filename))
                 {
                     if (MessageBoxResult.No == MessageBox.Show("Il file decrittato è già presente nella cartella di destinazione, sovrascrivere?", "Informazione", MessageBoxButton.YesNo, MessageBoxImage.Information))
-                        return "";
+                        return string.Empty;
                 }               
                 FileStream fs = new FileStream(filename, FileMode.Create);
                 stream.CopyTo(fs);
@@ -107,8 +103,8 @@ namespace InVisual
             }
             catch (Exception ex)
             {                
-                MessageBox.Show(string.Format("{0}-{1}", ex.Message, ex.StackTrace), "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
-                return "";
+                MessageBox.Show($"{ex.Message}-{ex.StackTrace}", "Errore", MessageBoxButton.OK, MessageBoxImage.Error);
+                return string.Empty;
             }
 
         }
@@ -117,13 +113,7 @@ namespace InVisual
         {
             pages.wndConfigure wnd = new pages.wndConfigure();
             wnd.ShowDialog();
-        }
-
-        
-
-        
-
-       
+        }                     
 
         void m_exit()
         {
@@ -152,7 +142,7 @@ namespace InVisual
         void m_writeMessage(string message, int mode)
         {
             //todo: visualizzare icona
-            message = string.Format("{0}\t{1}", DateTime.Now, message);
+            message = $"{DateTime.Now}\t{message}";
             lstMessages.Items.Add(message);
             lstMessages.SelectedIndex = lstMessages.Items.Count - 1;
         }
@@ -163,7 +153,7 @@ namespace InVisual
 
         void m_showInBrowser(string xmlfile)
         {
-            lblTitle.Content = string.Format("ANTEPRIMA FATTURA : {0}", System.IO.Path.GetFileName(xmlfile));
+            lblTitle.Content = $"ANTEPRIMA FATTURA : {System.IO.Path.GetFileName(xmlfile)}";
             string xsltFullPath = InVisualLib.configuration.clsXml.getValue(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "InVisual.xml"), "configuration", "xslt");
             string html = InVisualLib.xml.clsXmlTransform.getHtml(xmlfile, xsltFullPath);
             

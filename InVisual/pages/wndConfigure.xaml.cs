@@ -87,7 +87,7 @@ namespace InVisual.pages
             ofd.Title = caption;
             ofd.Filter = filter;
             ofd.InitialDirectory = InVisualLib.configuration.clsXml.getValue(System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "InVisual.xml"), "configuration", "lastXmlPath");
-            if (ofd.ShowDialog() == false) return;
+            if (!ofd.ShowDialog().Value) return;
             utb.text = ofd.FileName;
         }
 
