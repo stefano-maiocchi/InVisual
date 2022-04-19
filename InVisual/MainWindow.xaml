@@ -1,0 +1,62 @@
+﻿<Window x:Class="InVisual.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ParserNet"
+        mc:Ignorable="d"
+        Title="InVisual - Applicazione per la visualizzazione di FE" Height="650" Width="900" Icon="images/Zelus2002.ico" WindowState="Maximized">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="261*"/>
+            <ColumnDefinition Width="185*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!-- toolbar -->
+        <ToolBarTray Grid.Row="0" Grid.ColumnSpan="2">
+            <ToolBar x:Name="tlbOpenSave" Band="0" BandIndex="0">
+                <Button x:Name="cmdOpen" Click="m_OnToolbarClicked" Tag="OPEN">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="images/open_18x18.png"></Image>
+                        <TextBlock Text="Apri"></TextBlock>
+                    </StackPanel>
+                </Button>
+            </ToolBar>
+            <ToolBar x:Name="tlbConfigure" Band="0" BandIndex="1">
+                <Button x:Name="cmdConfigure" Click="m_OnToolbarClicked" Tag="CONFIGURE">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="images/configure_18x18.png"></Image>
+                        <TextBlock Text="Configura"></TextBlock>
+                    </StackPanel>
+                </Button>
+            </ToolBar>
+            <ToolBar x:Name="tlbExit" Band="0" BandIndex="2">
+                <Button x:Name="cmdExit" Click="m_OnToolbarClicked" Tag="EXIT">
+                    <StackPanel Orientation="Vertical">
+                        <Image Source="images/exit_18x18.png"></Image>
+                        <TextBlock Text="Esci"></TextBlock>
+                    </StackPanel>
+                </Button>
+            </ToolBar>
+        </ToolBarTray>
+        <!-- preview -->
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="Silver">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label x:Name="lblTitle"  Grid.Row="0" Background="Gainsboro" Margin="10 10 10 0" FontSize="20" FontWeight="Bold" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">ANTEPRIMA FATTURA</Label>
+            <WebBrowser x:Name="wb" Margin="10" Grid.Row="1" ></WebBrowser>
+        </Grid>
+        <!--.. messages -->
+        <Expander x:Name="expSystemMessages" Grid.Row="2" Header="Selezionare per visualizzare i messaggi di sistema" FontWeight="Bold" Background="Silver" Foreground="Black" Expanded="m_OnShowSystemMessages" Collapsed="m_OnHideSystemMessages" Grid.ColumnSpan="2">
+            <ListBox x:Name="lstMessages" Height="150" Background="LightYellow" Margin="10"></ListBox>
+        </Expander>
+
+    </Grid>
+</Window>

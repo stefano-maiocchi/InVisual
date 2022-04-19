@@ -1,0 +1,37 @@
+﻿<Window xmlns:controls="clr-namespace:InVisual.controls"  x:Class="InVisual.pages.wndConfigure"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:InVisual.pages"
+        mc:Ignorable="d"
+        Title="Configurazione" Height="200" Width="600" ResizeMode="NoResize" Icon="/InVisual;component/images/Zelus2002.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        
+        <!-- selezione files e librerie -->
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Margin="5">
+            <Label Content="Percorso file xslt"></Label>
+            <controls:uTextButton x:Name="utbXslt" caption="APRI" Height="25" Tag="XSLT" OnButtonClick="m_OnBrowseButtonClick" />
+        </StackPanel>
+
+        <CheckBox x:Name="chkLog" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Margin="5" Content="Attiva tracciamento" />
+        
+
+        <Button Grid.Row="4" Grid.Column="1" Width="90" Height="25" Content="Salva" HorizontalAlignment="Left" Margin="5 0 0 0" Tag="SAVE" Click="m_OnExecuteAction"></Button>
+        <Button Grid.Row="4" Grid.Column="2" Width="90" Height="25" Content="Annulla" HorizontalAlignment="Left" Margin="5 0 5 0" Tag="EXIT" Click="m_OnExecuteAction"></Button>
+
+    </Grid>
+    
+</Window>

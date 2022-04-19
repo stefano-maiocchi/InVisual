@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="InVisual.controls.uTextButton"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InVisual.controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="30" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="100"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <TextBox x:Name="txt" Grid.Column="0" Margin="0 0 2 0" VerticalContentAlignment="Center"></TextBox>
+
+        <Border  x:Name="btn"  Grid.Column="1" Margin="2 0 0 0" Cursor="Hand" MouseDown="btn_MouseDown" CornerRadius="2">
+
+            <Grid>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="30"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <TextBlock x:Name="tb" Foreground="White" Grid.Column="1" FontFamily="Ubuntu" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                <Image x:Name="img" Grid.Column="2" Stretch="None"></Image>
+
+            </Grid>
+            <Border.Style>
+                <Style TargetType="Border">
+                    <Setter Property="Background" Value="#7a919d" />
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="DarkSlateGray" />
+                        </Trigger>
+                        <EventTrigger RoutedEvent="Border.MouseDown">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Duration="0:0:0.15" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#607c8a" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="Border.MouseUp">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation Duration="0:0:0.15" Storyboard.TargetProperty="(Border.Background).(SolidColorBrush.Color)" To="#7a919d" />
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+
+        </Border>
+
+
+
+    </Grid>
+</UserControl>

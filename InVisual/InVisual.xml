@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<root>
+  <configuration>
+    <par id="xslt" value="D:\Export\Progetti\ZELUS\InVisual\InVisual\xsl\fatturaordinaria_v1.2.xsl" />
+    <par id="lastXmlPath" value="D:\Export\Progetti\ZELUS\InVisual\data\xml" />
+	<par id="log" value="y" />
+    <par id="loglevel" value="14" />	  
+  </configuration>
+</root>
